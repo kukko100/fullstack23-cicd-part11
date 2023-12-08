@@ -16,7 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Check commit message for skip
+        id: check_skip
+        run: echo "::set-output name=skip::$(if [[ $(git log --format=%B -n 1 $GITHUB_SHA) == *"#skip"* ]]; then echo true; else echo false; fi)"
       - name: Deploy only on main branch
+        if: ${{ steps.check_skip.outputs.skip != 'true' }}
         run: |
           if [ "${{ github.event_name }}" == "push" ] && [ -z "${{ github.event.pull_request }}" ]; then
             flyctl deploy --remote-only
