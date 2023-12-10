@@ -1,6 +1,9 @@
 name: Deployment Pipeline
 
 on:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
   push:
     branches:
       - master
@@ -62,5 +65,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           DEFAULT_BRANCH: master
-
-  #asdf
+  
