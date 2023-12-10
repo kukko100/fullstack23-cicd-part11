@@ -32,14 +32,16 @@ jobs:
         if: success()
         with:
             severity: info
-            details: Test Succeeded!
+            details:
+              Test Succeeded!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
             severity: error
-            details: Test Failed!
+            details:
+              Test Failed!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Cancelled
         uses: rjstone/discord-webhook-notify@v1
@@ -48,7 +50,3 @@ jobs:
             severity: warn
             details: Test Cancelled!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      
-  
-
-#testing without skip message
