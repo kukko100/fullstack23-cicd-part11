@@ -26,24 +26,22 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: http://localhost:5000
+           wait-on: http://localhost:5000
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
             severity: info
-            details: |
+            details:
               Test Succeeded!
-              Commit URL: [Commit](${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/commit/${{ env.GITHUB_SHA }})
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
             severity: error
-            details: |
-              Test Succeeded!
-              Commit URL: [Commit](${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/commit/${{ env.GITHUB_SHA }})
+            details:
+              Test Failed!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Cancelled
         uses: rjstone/discord-webhook-notify@v1
@@ -52,7 +50,3 @@ jobs:
             severity: warn
             details: Test Cancelled!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      
-  
-
-#testing without skip message
