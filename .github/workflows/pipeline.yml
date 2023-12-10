@@ -32,14 +32,18 @@ jobs:
         if: success()
         with:
             severity: info
-            details: Test Succeeded!
+            details: details: |
+              Test Succeeded!
+              Commit URL: [Commit](${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/commit/${{ env.GITHUB_SHA }})
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
             severity: error
-            details: Test Failed!
+            details: details: |
+              Test Failed!
+              Commit URL: [Commit](${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/commit/${{ env.GITHUB_SHA }})
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Cancelled
         uses: rjstone/discord-webhook-notify@v1
