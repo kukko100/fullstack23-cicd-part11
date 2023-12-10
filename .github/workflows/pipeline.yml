@@ -42,8 +42,7 @@ jobs:
         with:
             severity: error
             details: details: |
-              Test Failed!
-              Commit URL: [Commit](${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/commit/${{ env.GITHUB_SHA }})
+              Test Failed! [Commit](${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/commit/${{ env.GITHUB_SHA }})
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Cancelled
         uses: rjstone/discord-webhook-notify@v1
