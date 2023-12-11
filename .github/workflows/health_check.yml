@@ -1,0 +1,39 @@
+name: Periodic Health Check
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '5 0 * * *' # Run every day at midnight UTC
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: URL Health Check
+      uses: Jtalk/url-health-check-action@v3.2
+      with: 
+        url: https://fullstack23-cicd-part11-2.fly.dev/
+    - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            details: Test Succeeded!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+            severity: error
+            details: Test Failed!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Cancelled
+        uses: rjstone/discord-webhook-notify@v1
+        if: cancelled()
+        with:
+            severity: warn
+            details: Test Cancelled!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
