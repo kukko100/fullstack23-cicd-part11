@@ -1,8 +1,7 @@
 # Full Stack open CI/CD
 
-This repository is used for the CI/CD module of the Full stack open course
-
-Fork the repository to complete course exercises
+This is a forked repository that has been completed by doing all the part11 "ci/cd" exercises.
+Here is a link to the final exercises where I added CI functionality to an earlier project, in this case the redux anecdotes project. https://github.com/kukko100/fullstack23CICD_ownProject
 
 ## Commands
 
